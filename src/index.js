@@ -26,7 +26,7 @@ const fileName = 'data.csv'; // назва файлу з якого стягув
     }
 
     try {
-      const resRequest = ((await requestToApi(domains[i], positions)).data)
+      const resRequest = ((await requestToApi(authToken, domains[i], positions)).data)
 
       for (let i = 0; i < resRequest.emails.length; i++) {
         resRequest.emails[i].domain = domains[i]

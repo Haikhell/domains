@@ -2,12 +2,12 @@ const axios = require('axios');
 const { config } = require('./config');
 const apiPath = 'https://api.snov.io/v2/domain-emails-with-info'
 
-function requestToApi(domain, positions, limit = 1) {
+function requestToApi(authToken, domain, positions, limit = 1) {
   return axios({
     url: apiPath,
     method: 'get',
     headers: {
-      Authorization: `Bearer ${config.token}`
+      Authorization: `Bearer ${authToken}`
     },
     params: {
       type: 'all',
@@ -45,7 +45,7 @@ async function authUser() {
     return res.data.access_token
   } catch (error) {
     console.log('authorization is fail')
-    return
+    return null
   }
 
 
