@@ -36,6 +36,7 @@ const fileName = 'data.csv'; // назва файлу з якого стягув
 
       resultInfoArray.push(...resRequest.emails)
     } catch (error) {
+      console.log(error)
       if (config.NODE_ENV === 'development') {
         if (error.response.data.errors) {
           console.log(error.response.data.errors)
@@ -44,7 +45,8 @@ const fileName = 'data.csv'; // назва файлу з якого стягув
         }
       }
     }
-
-    await write(resultInfoArray)
   }
+  await write(resultInfoArray)
+
 })()
+

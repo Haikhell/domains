@@ -14,11 +14,10 @@ async function write(records) {
     ]
   });
 
-  await csvWriter.writeRecords(records)       // returns a promise
+  csvWriter.writeRecords(records)
     .then(() => {
       console.log('file saved');
     });
-
 }
 
 

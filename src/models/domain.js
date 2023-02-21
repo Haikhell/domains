@@ -12,7 +12,6 @@ module.exports = class Domain extends Model {
       email: {
         allowNull: false,
         type: DataTypes.STRING,
-        unique: true,
         validate: {
           isEmail: true,
         },
@@ -41,6 +40,7 @@ module.exports = class Domain extends Model {
         type: DataTypes.STRING,
         allowNull: false
       },
+
       createdAt: {
         allowNull: false,
         defaultValue: DataTypes.literal('CURRENT_TIMESTAMP'),
