@@ -16,7 +16,7 @@ async function write(records) {
 
   await csvWriter.writeRecords(records)       // returns a promise
     .then(() => {
-      console.log('...Done');
+      console.log('file saved');
     });
 
 }
