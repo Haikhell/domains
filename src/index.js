@@ -1,9 +1,11 @@
 const { requestToApi, authUser } = require('./requests')
 const readCsv = require('./csvReader');
-const { models } = require('./models');
 const write = require('./csvWriter');
-const positions = ["CEO", "CTO", "COO", "CDO", "CMO", "COO", "Head of engineering"];
+
 const { config } = require('./config');
+const { models } = require('./models');
+
+const positions = ["CEO", "CTO", "COO", "CDO", "CMO", "COO", "Head of engineering"];
 const fileName = 'data.csv'; // назва файлу з якого стягувати CSV данні (список доменів)
 
 (async () => {
