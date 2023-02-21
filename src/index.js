@@ -22,7 +22,7 @@ const fileName = 'data.csv';
 
       resultInfoArray.push(...resRequest.emails)
     } catch (error) {
-      console.log(error.response.data.errors)
+      console.log(error)
     }
 
     await write(resultInfoArray)
