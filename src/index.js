@@ -25,26 +25,38 @@ const fileName = 'data.csv'; // назва файлу з якого стягув
       console.log(`request to domain: ${domains[i]}`)
     }
 
-    try {
-      const resRequest = ((await requestToApi(authToken, domains[i], positions)).data)
+    const emails = await models.Domain.findAll({
+      where: {
+        domain: domains[i]
+      },
+    })
 
-      for (let i = 0; i < resRequest.emails.length; i++) {
-        resRequest.emails[i].domain = domains[i]
-      }
+    if (emails.length <= 0) {
+      try {
+        const resRequest = ((await requestToApi(authToken, domains[i], positions, countNeedEmailsFind).data))
 
-      await models.Domain.bulkCreate(resRequest.emails)
+        for (let i = 0; i < resRequest.emails.length; i++) {
+          resRequest.emails[i].domain = domains[i]
+        }
 
-      resultInfoArray.push(...resRequest.emails)
-    } catch (error) {
-      console.log(error)
-      if (config.NODE_ENV === 'development') {
-        if (error.response.data.errors) {
-          console.log(error.response.data.errors)
-        } else {
-          console.log(error.message)
+        await models.Domain.bulkCreate(resRequest.emails)
+
+        resultInfoArray.push(...resRequest.emails)
+        resultInfoArray.push(...emails)
+      } catch (error) {
+        console.log(error)
+        if (config.NODE_ENV === 'development') {
+          if (error.response) {
+            console.log(error.response)
+          } else {
+            console.log(error.message)
+          }
         }
       }
+    } else {
+      resultInfoArray.push(...emails)
     }
+
   }
   await write(resultInfoArray)
 

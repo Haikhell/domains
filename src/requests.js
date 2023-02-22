@@ -13,7 +13,8 @@ function requestToApi(authToken, domain, positions, limit = 1) {
       type: 'all',
       domain,
       limit,
-      positions
+      positions,
+      lastId
     }
   });
 }
